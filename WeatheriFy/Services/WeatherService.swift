@@ -6,7 +6,7 @@ class WeatherService {
     func fetchWeather(for city: String, completion: @escaping (WeatherModel?) -> Void) {
 
         let urlString =
-        "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=6f001d9f53ddda9c5cde13811ee5f14a&units=metric"
+        "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=<yourToken>a&units=metric"
 
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
