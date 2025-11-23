@@ -1,0 +1,50 @@
+# Xcode
+.DS_Store
+xcuserdata/
+*.xcuserstate
+*.xcworkspace
+*.xccheckout
+*.xcodeproj/xcuserdata
+*.xcodeproj/project.xcworkspace/xcuserdata
+
+# SwiftPM
+.build/
+.swiftpm/
+Package.resolved
+
+# Derived Data
+DerivedData/
+
+# Logs
+*.log
+
+# Archives
+*.xcarchive
+
+# iOS
+*.ipa
+
+# Pods (if any)
+Pods/
+podfile.lock
+
+# Carthage
+Carthage/
+Carthage/Build
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/readme.md
+
+# Environment & Secrets
+Secrets.xcconfig
+.env
+.env.*
+*.key
+*.pem
+
+# Crash logs
+*.crash

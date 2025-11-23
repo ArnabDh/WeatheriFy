@@ -8,16 +8,21 @@
 import Foundation
 
 struct SunTimeCalculator {
-
-    static func formatTime(epoch: TimeInterval) -> String {
-
+    
+    static func formatTime(epoch: TimeInterval, timezoneOffset: Int) -> String {
+        
         let date = Date(timeIntervalSince1970: epoch)
 
         //Format the output
         let formatter = DateFormatter()
-        formatter.dateFormat = "h:mm a"
-        formatter.amSymbol = "AM"
-        formatter.pmSymbol = "PM"
+        formatter.locale = Locale.current
+        
+        formatter.dateFormat = DateFormatter.dateFormat(
+            fromTemplate: "jm",
+            options: 0,
+            locale: Locale.current
+        )
+        formatter.timeZone = TimeZone(secondsFromGMT: timezoneOffset)
 
         return formatter.string(from: date)
     }
@@ -25,12 +30,13 @@ struct SunTimeCalculator {
     static func getSunTimes(
         sunrise: TimeInterval,
         sunset: TimeInterval,
+        timezone: Int
     ) -> (sunrise: String, sunset: String) {
-
-        let sunriseTime = formatTime(epoch: sunrise)
-        let sunsetTime = formatTime(epoch: sunset)
-
-        return (sunriseTime, sunsetTime)
+        
+        return (
+            sunrise: formatTime(epoch: sunrise, timezoneOffset: timezone),
+            sunset: formatTime(epoch: sunset, timezoneOffset: timezone)
+        )
     }
 }
 

@@ -16,7 +16,8 @@ struct SunCard: View {
 
             let sunTimes = SunTimeCalculator.getSunTimes(
                 sunrise: viewModel.sunRise,
-                sunset: viewModel.sunSet
+                sunset: viewModel.sunSet,
+                timezone: viewModel.timezone
             )
 
             VStack(spacing: 12) {

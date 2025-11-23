@@ -20,6 +20,7 @@ class WeatherViewModel: ObservableObject {
     @Published var weatherIcon = ""
     @Published var sunRise = 0.0
     @Published var sunSet = 0.0
+    @Published var timezone = 0
 
 
     private let service = WeatherService()
@@ -48,6 +49,7 @@ class WeatherViewModel: ObservableObject {
                     self.weatherIcon = model.weatherIcon
                     self.sunRise = model.sunRise
                     self.sunSet = model.sunSet
+                    self.timezone = model.timezone
 
                     // update camera
                     self.camera = MapCameraPosition.region(

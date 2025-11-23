@@ -4,9 +4,11 @@ import CoreLocation
 class WeatherService {
 
     func fetchWeather(for city: String, completion: @escaping (WeatherModel?) -> Void) {
+        
+        let key = Secrets.OPENWEATHER_API_KEY
 
         let urlString =
-        "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=<yourToken>a&units=metric"
+        "https://api.openweathermap.org/data/2.5/weather?q=\(city)&appid=\(key)&units=metric"
 
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
@@ -44,6 +46,7 @@ class WeatherService {
                 let weatherIcon = (json["weather"] as? [[String: Any]])?[0]["icon"] as? String ?? ""
                 let sunRise = (json["sys"] as? [String: Any])?["sunrise"] as? TimeInterval ?? 0.0
                 let sunSet = (json["sys"] as? [String: Any])?["sunset"] as? TimeInterval ?? 0.0
+                let timezone = json["timezone"] as? Int ?? 0
 
                 completion(
                     WeatherModel(
@@ -56,7 +59,8 @@ class WeatherService {
                         description: description,
                         weatherIcon: weatherIcon,
                         sunRise: sunRise,
-                        sunSet: sunSet
+                        sunSet: sunSet,
+                        timezone: timezone
                     )
                 )
             } else {

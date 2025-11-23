@@ -6,21 +6,35 @@ struct WeatherView: View {
     @State private var cityName = ""
 
     var body: some View {
-        VStack(spacing: 5) {
+        ZStack {
             
-            //Map Section
-            MapSection(viewModel: viewModel)
+            //Dynamic Weather Background
+            WeatherBackground(condition: viewModel.condition)
+                .ignoresSafeArea()
+            
+            VStack(spacing: 5) {
+                
+                //Map Section
+                MapSection(viewModel: viewModel)
 
-            //Search Bar
-            SearchBar(cityName: $cityName, onSearch: {
-                viewModel.fetchWeather(for: cityName)
-            })
+                //Search Bar
+                SearchBar(cityName: $cityName, onSearch: {
+                    viewModel.fetchWeather(for: cityName)
+                })
+                
+                DayProgressBar(
+                    sunrise: viewModel.sunRise,
+                    sunset: viewModel.sunSet,
+                    timezone: viewModel.timezone
+                )
 
-            //Weather Card & SunTime Card
-            ScrollView {
-                WeatherCard(viewModel: viewModel)
-                SunCard(viewModel: viewModel)
+                //Weather Cards Overlay
+                ScrollView {
+                    WeatherCard(viewModel: viewModel)
+                    SunCard(viewModel: viewModel)
+                }
             }
+            .padding(.bottom, 8)
         }
     }
 }

@@ -25,6 +25,6 @@ struct MapSection: View {
                     .shadow(radius: 5)
             }
         }
-        .frame(height: 250)
+        .frame(height: 200)
     }
 }

@@ -19,4 +19,5 @@ struct WeatherModel {
     let weatherIcon: String
     let sunRise: TimeInterval
     let sunSet: TimeInterval
+    let timezone: Int
 }
