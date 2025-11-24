@@ -20,4 +20,8 @@ struct WeatherModel {
     let sunRise: TimeInterval
     let sunSet: TimeInterval
     let timezone: Int
+    let pressure: Int
+    let humidity: Int
+    let feels_like: Double
+    let windSpeed: Double
 }

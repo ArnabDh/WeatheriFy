@@ -22,15 +22,15 @@ struct WeatherView: View {
                     viewModel.fetchWeather(for: cityName)
                 })
                 
-                DayProgressBar(
-                    sunrise: viewModel.sunRise,
-                    sunset: viewModel.sunSet,
-                    timezone: viewModel.timezone
-                )
-
                 //Weather Cards Overlay
                 ScrollView {
                     WeatherCard(viewModel: viewModel)
+                    DayProgressBar(
+                        sunrise: viewModel.sunRise,
+                        sunset: viewModel.sunSet,
+                        timezone: viewModel.timezone,
+                        viewModel: viewModel
+                    )
                     SunCard(viewModel: viewModel)
                 }
             }

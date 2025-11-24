@@ -21,6 +21,11 @@ class WeatherViewModel: ObservableObject {
     @Published var sunRise = 0.0
     @Published var sunSet = 0.0
     @Published var timezone = 0
+    @Published var pressure = 0
+    @Published var humidity = 0
+    @Published var feels_like = 0.0
+    @Published var windSpeed = 0.0
+    
 
 
     private let service = WeatherService()
@@ -50,6 +55,10 @@ class WeatherViewModel: ObservableObject {
                     self.sunRise = model.sunRise
                     self.sunSet = model.sunSet
                     self.timezone = model.timezone
+                    self.pressure = model.pressure
+                    self.humidity = model.humidity
+                    self.feels_like = model.feels_like
+                    self.windSpeed = model.windSpeed
 
                     // update camera
                     self.camera = MapCameraPosition.region(
