@@ -4,6 +4,8 @@ import Combine
 
 class WeatherViewModel: ObservableObject {
 
+    @ObservedObject var aqiVM: AQIViewModel
+    
     @Published var responseText = ""
     @Published var markerCoordinate = CLLocationCoordinate2D(latitude: 37.7793, longitude: -122.4193)
     @Published var countryCode = ""
@@ -26,9 +28,14 @@ class WeatherViewModel: ObservableObject {
     @Published var feels_like = 0.0
     @Published var windSpeed = 0.0
     
-
+    @Published var lat = 0.0
+    @Published var lon = 0.0
 
     private let service = WeatherService()
+
+    init(aqiVM: AQIViewModel) {
+        self.aqiVM = aqiVM
+    }
 
     func fetchWeather(for city: String) {
 
@@ -59,14 +66,15 @@ class WeatherViewModel: ObservableObject {
                     self.humidity = model.humidity
                     self.feels_like = model.feels_like
                     self.windSpeed = model.windSpeed
-
-                    // update camera
-                    self.camera = MapCameraPosition.region(
+                    self.lat = model.lat
+                    self.lon = model.lon
+                    self.camera = .region(
                         MKCoordinateRegion(
                             center: model.coordinate,
                             span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
                         )
                     )
+                    self.aqiVM.fetchAQI(lat: self.lat, lon: self.lon)
                 } else {
                     self.responseText = "Failed to load weather data."
                 }

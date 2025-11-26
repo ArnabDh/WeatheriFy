@@ -68,7 +68,9 @@ class WeatherService {
                         pressure: pressure,
                         humidity: humidity,
                         feels_like: feels_like,
-                        windSpeed: windSpeed
+                        windSpeed: windSpeed,
+                        lat: lat,
+                        lon: lon
                     )
                 )
             } else {

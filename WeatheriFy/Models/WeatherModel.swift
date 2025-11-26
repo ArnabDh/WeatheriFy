@@ -24,4 +24,6 @@ struct WeatherModel {
     let humidity: Int
     let feels_like: Double
     let windSpeed: Double
+    let lat: Double
+    let lon: Double
 }

@@ -2,8 +2,15 @@ import SwiftUI
 import MapKit
 
 struct WeatherView: View {
-    @StateObject private var viewModel = WeatherViewModel()
+    @StateObject private var viewModel: WeatherViewModel
+    @StateObject private var AQIviewModel = AQIViewModel()
     @State private var cityName = ""
+    
+    init() {
+            let aqi = AQIViewModel()
+            _AQIviewModel = StateObject(wrappedValue: aqi)
+            _viewModel = StateObject(wrappedValue: WeatherViewModel(aqiVM: aqi))
+        }
 
     var body: some View {
         ZStack {
@@ -31,7 +38,7 @@ struct WeatherView: View {
                         timezone: viewModel.timezone,
                         viewModel: viewModel
                     )
-                    SunCard(viewModel: viewModel)
+                    AQICard(viewModel: viewModel,aqiViewModel: AQIviewModel)
                 }
             }
             .padding(.bottom, 8)
